@@ -322,7 +322,8 @@ SELECT
     CASE 
         WHEN cs.email is not NULL THEN 1
         ELSE 0
-    END as 'spam_count'
+    END as 'spam_count',
+    c.message
 FROM wp_contacts c
 LEFT JOIN wp_contacts_spam cs 
   on cs.email = c.email
