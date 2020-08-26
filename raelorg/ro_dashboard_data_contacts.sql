@@ -25,7 +25,7 @@ SELECT
     c.email,
     c.firstname,
     c.lastname,
-    c.country as code_country,
+    c.country as country,
     CASE
         WHEN c.country = 'ad' THEN 'Andorra'
         WHEN c.country = 'ae' THEN 'United Arab Emirates'
@@ -257,7 +257,7 @@ SELECT
         WHEN c.country = 'zw' THEN 'Zimbabwe'
         ELSE 'Unknow'
     END as 'country',
-    c.language as code_language,
+    c.language as language,
     CASE 
         WHEN c.language = 'ar' THEN 'Arabic'
         WHEN c.language = 'az' THEN 'Azerbaijani'
