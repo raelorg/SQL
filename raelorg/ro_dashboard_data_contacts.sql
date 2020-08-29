@@ -25,16 +25,18 @@ SELECT
     c.email,
     c.firstname,
     c.lastname,
-    c.country as country,
+    c.country as code_country,
     CASE
         WHEN c.country = 'ad' THEN 'Andorra'
         WHEN c.country = 'ae' THEN 'United Arab Emirates'
+        WHEN c.country = 'af' THEN 'Afghanistan'
         WHEN c.country = 'ag' THEN 'Antigua and Barbuda'
         WHEN c.country = 'ai' THEN 'Anguilla'
         WHEN c.country = 'al' THEN 'Albania'
         WHEN c.country = 'am' THEN 'Armenia'
         WHEN c.country = 'an' THEN 'Netherlands Antilles'
         WHEN c.country = 'ao' THEN 'Angola'
+        WHEN c.country = 'aq' THEN 'Antartica'
         WHEN c.country = 'ar' THEN 'Argentina'
         WHEN c.country = 'at' THEN 'Austria'
         WHEN c.country = 'au' THEN 'Australia'
@@ -66,6 +68,7 @@ SELECT
         WHEN c.country = 'cg' THEN 'Congo Brazzaville'
         WHEN c.country = 'ch' THEN 'Switzerland'
         WHEN c.country = 'ci' THEN 'Côte d''Ivoire'
+        WHEN c.country = 'ck' THEN 'Cook Islands'
         WHEN c.country = 'cl' THEN 'Chile'
         WHEN c.country = 'cm' THEN 'Cameroon'
         WHEN c.country = 'cn' THEN 'China'
@@ -106,6 +109,7 @@ SELECT
         WHEN c.country = 'gp' THEN 'Guadeloupe'
         WHEN c.country = 'gq' THEN 'Equatorial Guinea'
         WHEN c.country = 'gr' THEN 'Greece'
+        WHEN c.country = 'gs' THEN 'South Georgia and the South Sandwich Islands'
         WHEN c.country = 'gt' THEN 'Guatemala'
         WHEN c.country = 'gu' THEN 'Guam'
         WHEN c.country = 'gw' THEN 'Guinea-Bissau'
@@ -120,6 +124,7 @@ SELECT
         WHEN c.country = 'ie' THEN 'Ireland'
         WHEN c.country = 'il' THEN 'Israel'
         WHEN c.country = 'in' THEN 'India'
+        WHEN c.country = 'io' THEN 'British Indian Ocean Territory'
         WHEN c.country = 'iq' THEN 'Iraq'
         WHEN c.country = 'ir' THEN 'Iran'
         WHEN c.country = 'is' THEN 'Iceland'
@@ -172,12 +177,14 @@ SELECT
         WHEN c.country = 'na' THEN 'Namibia'
         WHEN c.country = 'nc' THEN 'New Caledonia'
         WHEN c.country = 'ne' THEN 'Niger'
+        WHEN c.country = 'nf' THEN 'Norfolk Island'
         WHEN c.country = 'ng' THEN 'Nigeria'
         WHEN c.country = 'ni' THEN 'Nicaragua'
         WHEN c.country = 'nl' THEN 'Netherlands'
         WHEN c.country = 'no' THEN 'Norway'
         WHEN c.country = 'np' THEN 'Nepal'
         WHEN c.country = 'nr' THEN 'Nauru'
+        WHEN c.country = 'nu' THEN 'Niue'
         WHEN c.country = 'nz' THEN 'New Zealand'
         WHEN c.country = 'om' THEN 'Oman'
         WHEN c.country = 'pa' THEN 'Panama'
@@ -230,6 +237,7 @@ SELECT
         WHEN c.country = 'tm' THEN 'Turkmenistan'
         WHEN c.country = 'tn' THEN 'Tunisia'
         WHEN c.country = 'to' THEN 'Tonga'
+        WHEN c.country = 'tp' THEN 'East Timor'
         WHEN c.country = 'tr' THEN 'Turkey'
         WHEN c.country = 'tt' THEN 'Trinidad and Tobago'
         WHEN c.country = 'tv' THEN 'Tuvalu'
@@ -257,7 +265,7 @@ SELECT
         WHEN c.country = 'zw' THEN 'Zimbabwe'
         ELSE 'Unknow'
     END as 'country',
-    c.language as language,
+    c.language as code_language,
     CASE 
         WHEN c.language = 'ar' THEN 'Arabic'
         WHEN c.language = 'az' THEN 'Azerbaijani'
@@ -323,7 +331,11 @@ SELECT
         WHEN cs.email is not NULL THEN 1
         ELSE 0
     END as 'spam_count',
-    c.message
+    c.message,
+    CASE 
+        WHEN cs.email is not NULL THEN 'Yes'
+        ELSE 'no'
+    END as 'spam'
 FROM wp_contacts c
 LEFT JOIN wp_contacts_spam cs 
   on cs.email = c.email
